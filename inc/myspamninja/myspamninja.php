@@ -17,10 +17,6 @@
             $user->ip = $session->ipaddress;
 
             $user->checkUser();
-
-            echo 'return';
-
-            die();
 	}
 	
 	public function squashSpam()
