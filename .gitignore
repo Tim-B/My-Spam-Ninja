@@ -1,5 +1,7 @@
-# ignore these
+# ignore all
 *
-# except foo
+# except
 !/inc/myspamninja/*
 !/inc/plugins/myspamninja.php
+!.gitignore
+!README
