@@ -1,13 +1,4 @@
 <?php
-/**
- * MyBB 1.6
- * Copyright 2010 MyBB Group, All Rights Reserved
- *
- * Website: http://mybb.com
- * License: http://mybb.com/about/license
- *
- * $Id: hello.php 5016 2010-06-12 00:24:02Z RyanGordon $
- */
  
 // Disallow direct access to this file for security reasons
 if(!defined("IN_MYBB"))
@@ -15,28 +6,17 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
-$plugins->add_hook("pre_output_page", "hello_world");
-$plugins->add_hook("postbit", "hello_world_postbit");
+include('inc/myspamninja/myspamninja.php');
+
 
 function hello_info()
 {
-	/**
-	 * Array of information about the plugin.
-	 * name: The name of the plugin
-	 * description: Description of what the plugin does
-	 * website: The website the plugin is maintained at (Optional)
-	 * author: The name of the author of the plugin
-	 * authorsite: The URL to the website of the author (Optional)
-	 * version: The version number of the plugin
-	 * guid: Unique ID issued by the MyBB Mods site for version checking
-	 * compatibility: A CSV list of MyBB versions supported. Ex, "121,123", "12*". Wildcards supported.
-	 */
 	return array(
-		"name"			=> "Hello World!",
-		"description"	=> "A sample plugin that prints hello world and prepends the content of each post to 'Hello world!'",
-		"website"		=> "http://mybb.com",
-		"author"		=> "MyBB Group",
-		"authorsite"	=> "http://mybb.com",
+		"name"			=> "My Spam Ninja",
+		"description"	=> "A complete spam management solution for MyBB.",
+		"website"		=> "https://github.com/Tim-B/My-Spam-Ninja",
+		"author"		=> "Tim B.",
+		"authorsite"	=> "https://github.com/Tim-B/My-Spam-Ninja",
 		"version"		=> "1.0",
 		"guid" 			=> "",
 		"compatibility" => "*"
@@ -96,16 +76,26 @@ function hello_info()
  * {
  * }
  */
-
-
-function hello_world($page)
+ 
+function myspamninja_install
 {
-	$page = str_replace("<div id=\"content\">", "<div id=\"content\"><p>Hello World!<br />This is a sample MyBB Plugin (which can be disabled!) that displays this message on all pages.</p>", $page);
-	return $page;
+		
 }
 
-function hello_world_postbit($post)
+function myspamninja_activate
 {
-	$post['message'] = "<strong>Hello world!</strong><br /><br />{$post['message']}";
+		
 }
+
+function myspamninja_uninstall
+{
+		
+}
+
+function myspamninja_deactivate
+{
+		
+}
+
+
 ?>
