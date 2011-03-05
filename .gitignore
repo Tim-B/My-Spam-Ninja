@@ -1,0 +1,5 @@
+# ignore these
+*
+# except foo
+!inc/myspamninja/*
+!inc/plugins/myspamninja.php
