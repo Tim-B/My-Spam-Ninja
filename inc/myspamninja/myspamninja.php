@@ -26,7 +26,7 @@
 
         public function adminTabs()
         {
-            global $modules;
+            global $modules, $page;
 
             require_once MYBB_ROOT ."inc/myspamninja/admin_module/module_meta.php";
 

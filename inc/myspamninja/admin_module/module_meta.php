@@ -5,6 +5,8 @@ if(!defined("IN_MYBB"))
 	die("Direct initialization of this file is not allowed.<br /><br />Please make sure IN_MYBB is defined.");
 }
 
+global $sub_menu;
+
 function spamninja_meta()
 {
 	global $page, $lang, $plugins;
@@ -15,14 +17,8 @@ function spamninja_meta()
 	$sub_menu['10'] = array("id" => "statistics", "title" => 'Statistics', "link" => "index.php?module=spamninja-index");
 	$sub_menu['20'] = array("id" => "configuration", "title" => 'Configuration', "link" => "index.php?module=spamninja-configuration");
 	$sub_menu['30'] = array("id" => "log", "title" => 'Log', "link" => "index.php?module=spamninja-log");
-
-        $sidebar = new SidebarItem('My Spam Ninja');
-	$sidebar->add_menu_items($sub_menu, $page->active_action);
-
-	$page->sidebar .= $sidebar->get_markup();
 	
-	$page->add_menu_item('My Spam Ninja', "msn", "index.php?module=spamninja", 80, $sub_menu);
-	
+	$page->add_menu_item('My Spam Ninja', "spamninja", "index.php?module=spamninja", 80, $sub_menu);
 	return true;
 }
 
@@ -48,6 +44,7 @@ function spamninja_action_handler($action)
 		$page->active_action = "statistics";
 		return "statistics.php";
 	}
+
 }
 
 ?>

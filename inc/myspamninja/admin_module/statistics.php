@@ -10,7 +10,7 @@ $page->add_breadcrumb_item('Statistics', "index.php?module=spamninja-statistics"
 
 if(!$mybb->input['action'])
 {
-        global $page;
+        global $page, $sidebar, $sub_menu;
 
         $page->output_header('My Spam Ninja Statistics');
 

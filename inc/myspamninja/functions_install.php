@@ -2,6 +2,8 @@
 
 class SNInstall{
 
+    private $settings = array();
+
     public function install()
     {
         global $mybb, $db;
@@ -40,6 +42,12 @@ class SNInstall{
 	global $mybb, $db;
 
 	return $db->table_exists("spamninjalog");
+    }
+
+    private function _addSetting(){
+        $settings[] = array(
+
+        );
     }
 
 }
