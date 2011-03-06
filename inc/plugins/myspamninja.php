@@ -13,6 +13,10 @@ require_once MYBB_ROOT .'inc/myspamninja/functions_install.php';
 
 $plugins->add_hook("member_do_register_start", "SNMySpamNinja::checkRegistration");
 
+$plugins->add_hook("admin_tabs", "SNMySpamNinja::adminTabs");
+
+$plugins->add_hook("admin_load", "SNMySpamNinja::adminLoad");
+
 function myspamninja_info()
 {
 	return array(

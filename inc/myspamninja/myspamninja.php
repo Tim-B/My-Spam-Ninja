@@ -24,5 +24,33 @@
 	
 	}
 
+        public function adminTabs()
+        {
+            global $modules;
+
+            require_once MYBB_ROOT ."inc/myspamninja/admin_module/module_meta.php";
+
+            $has_permission = true;
+            
+            spamninja_meta();
+
+            $modules['spamninja'] = 1;
+
+        }
+
+        public function adminLoad()
+        {
+            global $modules_dir, $run_module;
+
+            if($run_module == 'spamninja'){
+
+                $modules_dir .= '/../../inc/admin_module';
+
+                $run_module = '';
+
+            }
+
+        }
+
     }
 ?>
