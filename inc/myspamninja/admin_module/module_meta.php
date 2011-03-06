@@ -15,6 +15,11 @@ function spamninja_meta()
 	$sub_menu['10'] = array("id" => "statistics", "title" => 'Statistics', "link" => "index.php?module=spamninja-index");
 	$sub_menu['20'] = array("id" => "configuration", "title" => 'Configuration', "link" => "index.php?module=spamninja-configuration");
 	$sub_menu['30'] = array("id" => "log", "title" => 'Log', "link" => "index.php?module=spamninja-log");
+
+        $sidebar = new SidebarItem('My Spam Ninja');
+	$sidebar->add_menu_items($sub_menu, $page->active_action);
+
+	$page->sidebar .= $sidebar->get_markup();
 	
 	$page->add_menu_item('My Spam Ninja', "msn", "index.php?module=spamninja", 80, $sub_menu);
 	

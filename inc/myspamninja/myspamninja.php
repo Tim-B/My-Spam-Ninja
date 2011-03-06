@@ -44,9 +44,9 @@
 
             if($run_module == 'spamninja'){
 
-                $modules_dir .= '/../../inc/admin_module';
+                $modules_dir .= '/../../inc/myspamninja';
 
-                $run_module = '';
+                $run_module = 'admin_module';
 
             }
 
