@@ -10,11 +10,23 @@ class SNInstall{
 
         $db->query('
             CREATE TABLE  ' . TABLE_PREFIX . 'spamninjalog (
-            `log_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            `username` VARCHAR( 80 ) NOT NULL ,
-            `email` VARCHAR( 80 ) NOT NULL ,
-            `ip` VARCHAR( 80 ) NOT NULL
-            ) ENGINE = MYISAM ;');
+            `log_id` int(11) NOT NULL AUTO_INCREMENT,
+            `username` varchar(80) NOT NULL,
+            `email` varchar(80) NOT NULL,
+            `ip` varchar(80) NOT NULL,
+            `ipmatch` tinyint(1) NOT NULL,
+            `emailmatch` tinyint(1) NOT NULL,
+            `usermatch` tinyint(1) NOT NULL,
+             PRIMARY KEY (`log_id`)
+            ) ENGINE=MyISAM;');
+
+        $db->query('
+            CREATE TABLE  ' . TABLE_PREFIX . 'spamninjacache (
+            `sn_id` int(11) NOT NULL AUTO_INCREMENT,
+            `type` varchar(80) NOT NULL,
+            `value` varchar(80) NOT NULL,
+             PRIMARY KEY (`sn_id`)
+            ) ENGINE=MyISAM;');
 
     }
 
@@ -24,6 +36,11 @@ class SNInstall{
         if($db->table_exists("spamninjalog"))
 	{
             $db->drop_table("spamninjalog");
+	}
+
+        if($db->table_exists("spamninjacache"))
+	{
+            $db->drop_table("spamninjacache");
 	}
     }
 
@@ -44,7 +61,7 @@ class SNInstall{
 	return $db->table_exists("spamninjalog");
     }
 
-    private function _addSetting(){
+    private function _addSetting($name, $title, $description){
         $settings[] = array(
 
         );

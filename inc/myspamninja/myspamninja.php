@@ -2,19 +2,43 @@
 
     require_once MYBB_ROOT .'inc/myspamninja/class_user.php';
 
+    require_once MYBB_ROOT .'inc/myspamninja/model_user.php';
+
     class SNMySpamNinja{
 
         public function checkRegistration()
 	{
             global $mybb, $session;
 
-            $user = New SNUser();
+            $mybb->settings['sn_mode'] = 'majority';
 
-            $user->username = $mybb->input['username'];
+            $mybb->settings['sn_checkip'] = True;
 
-            $user->email = $mybb->input['email'];
+            $mybb->settings['sn_checkemail'] = True;
 
-            $user->ip = $session->ipaddress;
+            $mybb->settings['sn_checkuser'] = True;
+
+            $mybb->settings['sn_minuser'] = 2;
+
+            $mybb->settings['sn_minip'] = 1;
+
+            $mybb->settings['sn_minemail'] = 2;
+
+            $mybb->settings['sn_log'] = True;
+
+            $mybb->settings['sn_usecache'] = True;
+
+            $user = New SN_model_user();
+
+            //$user->setUsername($mybb->input['username']);
+
+            $user->setUsername('Reyannethna');
+
+            //$user->setEmail($mybb->input['email']);
+
+            $user->setEmail('momvyra@yahoo.co.uk');
+
+            $user->setIP($session->ipaddress);
 
             $user->checkUser();
 	}
