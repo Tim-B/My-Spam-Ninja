@@ -31,30 +31,33 @@ function myspamninja_info()
 	);
 }
 
- 
 function myspamninja_install()
 {
-	SNInstall::install();
+    $install = new SNInstall;
+    $install->install();
 }
 
 function myspamninja_activate()
 {
-	SNInstall::activate();
+    $install = new SNInstall;
+    $install->activate();
 }
 
 function myspamninja_uninstall()
 {
-	SNInstall::uninstall();
+    $install = new SNInstall;
+    $install->uninstall();
 }
 
 function myspamninja_deactivate()
 {
-	SNInstall::deactivate();
+    $install = new SNInstall;
+    $install->deactivate();
 }
 
 function myspamninja_is_installed()
 {
-        return SNInstall::is_installed();
+    return SNInstall::is_installed();
 }
 
 

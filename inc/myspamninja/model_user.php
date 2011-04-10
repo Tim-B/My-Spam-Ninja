@@ -74,12 +74,12 @@ class SN_model_user{
         
         global $mybb;
 
-        if($mybb->settings['sn_usecache'] == True)
+        if($mybb->settings['SN_configuration_usecache'] == True)
         {
             $this->_checkCache();
             if($this->checkResults($this->emailcached, $this->ipcached, $this->usernamecached))
             {
-                //return True;
+                return True;
             }
 
         }
@@ -185,23 +185,23 @@ class SN_model_user{
     {
         global $mybb;
 
-        $email = $email && $mybb->settings['sn_checkip'];
+        $email = $email && $mybb->settings['SN_configuration_checkip'];
 
-        $ip = $ip && $mybb->settings['sn_checkemail'];
+        $ip = $ip && $mybb->settings['SN_configuration_checkemail'];
 
-        $username = $username && $mybb->settings['sn_checkuser'];
+        $username = $username && $mybb->settings['SN_configuration_checkuser'];
 
         $count = $email + $ip + $username;
 
-        if(($mybb->settings['sn_mode'] == 'all') && ($count == 3))
+        if(($mybb->settings['SN_configuration_mode'] == 'all') && ($count == 3))
         {
             return True;
         }
-        else if(($mybb->settings['sn_mode'] == 'majority') && ($count >= 2))
+        else if(($mybb->settings['SN_configuration_mode'] == 'majority') && ($count >= 2))
         {
             return True;
         }
-        else if(($mybb->settings['sn_mode'] == 'one') && ($count >= 1))
+        else if(($mybb->settings['SN_configuration_mode'] == 'one') && ($count >= 1))
         {
             return True;
         }

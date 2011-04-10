@@ -24,19 +24,19 @@
 
             $data = json_decode($data);
 
-            if($data->ip->appears && ($data->ip->frequency >= $mybb->settings['sn_minip'])){
+            if($data->ip->appears && ($data->ip->frequency >= $mybb->settings['SN_configuration_minip'])){
 
                 $this->ipfound = True;
 
             }
 
-            if($data->email->appears && ($data->email->frequency >= $mybb->settings['sn_minemail'])){
+            if($data->email->appears && ($data->email->frequency >= $mybb->settings['SN_configuration_minemail'])){
 
                 $this->emailfound = True;
 
             }
 
-            if($data->username->appears && ($data->username->frequency >= $mybb->settings['sn_minuser'])){
+            if($data->username->appears && ($data->username->frequency >= $mybb->settings['SN_configuration_minuser'])){
 
                 $this->usernamefound = True;
 

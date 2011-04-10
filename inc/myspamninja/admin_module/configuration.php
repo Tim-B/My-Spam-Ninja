@@ -7,6 +7,7 @@ if(!defined("IN_MYBB"))
 
 $page->add_breadcrumb_item('Configuration', "index.php?module=spamninja-configuration");
 
+require_once MYBB_ROOT .'inc/myspamninja/configuration_class.php';
 
 if(!$mybb->input['action'])
 {
@@ -18,9 +19,9 @@ if(!$mybb->input['action'])
 
         if($page->active_action == 'configuration')
         {
-            	$sub_tabs['registration'] = array(
-			'title' => 'Registration',
-			'link' => "index.php?module=spamninja-configuration&amp;tabaction=registration",
+            	$sub_tabs['configuration'] = array(
+			'title' => 'General configuration',
+			'link' => "index.php?module=spamninja-configuration&amp;tabaction=configuration",
 			'description' => 'Edit options relating to how Spam Ninja filters new registrations.'
 		);
 
@@ -61,44 +62,25 @@ if(!$mybb->input['action'])
             if(isset($mybb->input['tabaction'])){
                 $tabaction = $mybb->input['tabaction'];
             }else{
-                $tabaction = 'registration';
+                $tabaction = 'configuration';
             }
 
             $page->output_nav_tabs($sub_tabs, $tabaction);
 
-            if($tabaction == 'other')
-            {
 
-                echo 'Other';
 
-            }
-            else if($tabaction == 'posting')
+            if(file_exists(MYBB_ROOT .'inc/myspamninja/admin_module/configuration/'.$tabaction.'.php'))
             {
+                include('configuration/'.$tabaction.'.php');
                 
-                echo 'Posting';
+                $SNclassname = 'configuration_' . $tabaction . '_class';
 
-            }
-            else if($tabaction == 'crowdninja')
-            {
+                $SNsettings = new $SNclassname;
 
-                echo 'Crowd Ninja';
-
-            }
-            else if($tabaction == 'captcha')
-            {
-
-                echo 'CAPTCHA';
+                $SNsettings->editSettings();
                 
-            }
-            else if($tabaction == 'autoninja')
-            {
-
-                echo 'AutoNinja';
-                
-            }
-            else
-            {
-                echo 'Registration';
+            }else{
+                echo '/configuration/'.$tabaction.'.php';
             }
 
         }

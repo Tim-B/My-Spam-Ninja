@@ -40,7 +40,10 @@
 
             $user->setIP($session->ipaddress);
 
-            $user->checkUser();
+            if(!$user->checkUser())
+            {
+                error('Your details match those of a known spammer');
+            }
 	}
 	
 	public function squashSpam()
