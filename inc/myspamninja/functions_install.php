@@ -4,10 +4,11 @@ class SNInstall{
 
     private $setting_insert = '';
 
-    private $settingcount = 0;
+    private $settingcount;
 
     public function __construct()
     {
+        $this->settingcount = 0;
         $this->setting_insert .= 'INSERT INTO ' . TABLE_PREFIX . 'settings (';
         $this->setting_insert .= 'name, title, description, optionscode, value, disporder, gid, isdefault ) ';
         $this->setting_insert .= 'VALUES ';
@@ -40,7 +41,8 @@ class SNInstall{
         $name = 'mode';
         $title = 'Filtering mode';
         $description = 'Should a user be rejected by the filter if they fail one, most or all of the checks on their details?';
-        $optionscode = 'select all=All majority=Most one=One';
+        $optionscode = "select return array(\'all\' => \'All\', \'most\' => \'Most\', \'one\' => \'One\');";
+        //$optionscode = "select return array(\'foo\' => \'bar\', 1,2,3);";
         $value = 2;
         $category = 'configuration';
 

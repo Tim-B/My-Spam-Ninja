@@ -17,27 +17,36 @@ class configuration_class
 
         ');
 
-        $form = new Form("index.php?module=config-settings&amp;action=change", "post", "change");
+        $form = new Form("index.php?module=spamninja-configuration&amp;task=save&amp;tabaction=".$this->setting_group, "post", "change");
 
         $form_container = new FormContainer('Settings');
-
-        
 
         while($result=$db->fetch_array($query))
         {
 
-            $elementname = 'setting[' . $result['name'] . ']';
+            $elementname = 'sn_setting[' . $result['name'] . ']';
 
-            echo $result['optionscode'] . ' | ' . $result['value'] . '<br />';
+            $settingtype = explode(' ', $result['optionscode']);
 
-            switch($result['optionscode'])
+            $settingtype = $settingtype[0];
+
+            switch($settingtype)
             {
                 case 'yesno':
-                    $setting_code = 'foo';
-                    //$setting_code = $form->generate_yes_no_radio($result['name'], $result['value'], true, array('id' => $elementname.'_yes', 'class' => $elementname), array('id' => $elementname.'_no', 'class' => $elementname));
+                    $settingcode = $form->generate_yes_no_radio($elementname, $result['value'], true, array('id' => $elementname.'_yes', 'class' => $elementname), array('id' => $elementname.'_no', 'class' => $elementname));
+                    break;
+                case 'onoff':
+                    $settingcode = $form->generate_on_off_radio($elementname, $setting['value'], true, array('id' => $element_id.'_on', 'class' => $element_id), array('id' => $element_id.'_off', 'class' => $element_id));
+                    break;
+                case 'select':
+                    $options = substr($result['optionscode'], 7);
+
+                    $options = eval(htmlspecialchars_decode($options));
+                    
+                    $settingcode = $form->generate_select_box($elementname, $options, $setting['value'], array('id' => $element_id));
                     break;
                 default:
-                    $settingcode = $form->generate_text_box($result['name'], $result['value'], array('id' => $elementname));
+                    $settingcode = $form->generate_text_box($elementname, $result['value'], array('id' => $elementname));
                     break;
             }
 
@@ -54,9 +63,20 @@ class configuration_class
         $form->end();
     }
 
-    public function saveSettings()
+    public function saveSettings($settings)
     {
+        global $db;
         
+        foreach($settings['sn_setting'] as $k => $v)
+        {
+            $query = 'UPDATE '. TABLE_PREFIX .'settings SET value = \'' . $v . '\' WHERE name = \'' . $k . '\';';
+            $db->query($query);
+        }
+
+        rebuild_settings();
+
+        flash_message('Settings updated', 'success');
+        admin_redirect("index.php?module=spamninja-configuration&tabaction=".$this->setting_group);
     }
 
 }

@@ -77,6 +77,11 @@ if(!$mybb->input['action'])
 
                 $SNsettings = new $SNclassname;
 
+                if($mybb->input['task'] == 'save')
+                {
+                    $SNsettings->saveSettings($mybb->input);
+                }
+
                 $SNsettings->editSettings();
                 
             }else{
